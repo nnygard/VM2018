@@ -1,3 +1,15 @@
 .clickableName {
     cursor: pointer;
 }
+
+.glyphicon {
+    font-size: 32px;
+}
+
+.row{
+        text-align:center;
+}
+
+.progress-bar{
+    width:45%;
+}
