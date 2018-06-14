@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import data from "./data.json";
 import "./App.css";
+import installPromt from "./installPromt.png";
 
 class App extends Component {
     constructor(props){
@@ -9,18 +10,23 @@ class App extends Component {
             currentUser:false,
             date:false,
             gamesToday:"",
+            menu:false,
+            prompted:false,
         };
         if (!this.state.date){
             //Set DATE
             this.state.date = new Date().toJSON().slice(0,10).replace(/-/g,'-');
         }
+
     }
 
     setPlayer(name){
         this.setState({
             currentUser: name,
+            menu: false,
         });
         this.updateGamesToday(this.state.date);
+        this.promtUser();
     }
 
     addDate(add){
@@ -42,6 +48,12 @@ class App extends Component {
         });
     }
 
+    MenuActive(){
+        this.setState({
+            menu: true,
+        });
+    }
+
     navigateToGames(){
         //Todo: Navigate to closest Game
         var FirstGame = new Date("2018-06-14").toJSON().slice(0,10).replace(/-/g,'-');
@@ -51,13 +63,28 @@ class App extends Component {
         this.updateGamesToday(FirstGame);
     }
 
+    promtUser(){
+        if (!window.matchMedia("(display-mode:standalone)").matches && this.state.prompted==false) {
+            this.setState({
+                prompted:true,
+            });
+        }
+    }
+
     renderPlayer() {
-        // console.log(this.state);
+        console.log(this.state);
         if (!this.state.currentUser){
             return (
                 <div>
                     <div className="row">
                         <h1>Välj en spelare!</h1>
+                        { !this.state.prompted && !window.matchMedia("(display-mode:standalone)").matches  ? (
+                            <div className="over">
+                            <img src={installPromt} alt="Installera" align=""/>
+                            </div>
+                        ) : <p>
+                        Four-four-two African Cup of Nations referee chip number 10 hat trick midfielder brace three-five-two UEFA European Championship defender upper 90 pitch World Cup. Forward four-four-two African Cup of Nations goalie ball one-two number 10 goal halftime midfielder soccer UEFA European Championship pitch chip hat trick. Hat trick referee pitch midfielder striker ball African Cup of Nations halftime forward World Cup one-two defender red card yellow card. World Cup chip number 10 halftime four-four-two ball three-five-two red card brace striker African Cup of Nations soccer midfielder forward defender.
+                        </p> }
                     </div>
                 </div>
             );
@@ -119,7 +146,7 @@ class App extends Component {
                     <nav className="navbar navbar-default navbar-fixed-top">
                         <div className="container">
                             <div className="navbar-header">
-                                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                                <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" onClick={()=>this.MenuActive()}>
                                     <span className="sr-only">Toggle navigation</span>
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
@@ -129,12 +156,13 @@ class App extends Component {
                             </div>
                             <div className="navbar-collapse collapse">
                                 <ul className="nav navbar-nav">
-                                    <li className={this.state.currentUser === 'Niklas' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Niklas")}>Niklas</a></li>
-                                    <li className={this.state.currentUser === 'Alex' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Alex")}>Alex</a></li>
-                                    <li className={this.state.currentUser === 'Douglas' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Douglas")}>Douglas</a></li>
-                                    <li className={this.state.currentUser === 'Patrik' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Patrik")}>Patrik</a></li>
-                                    <li className={this.state.currentUser === 'Jenny' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Jenny")}>Jenny</a></li>
-                                    <li className={this.state.currentUser === 'Petra' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Petra")}>Petra</a></li>
+                                    <li className={this.state.currentUser === 'Niklas' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Niklas")}>Niklas</a></li>
+                                    <li className={this.state.currentUser === 'Alex' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Alex")}>Alex</a></li>
+                                    <li className={this.state.currentUser === 'Douglas' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Douglas")}>Douglas</a></li>
+                                    <li className={this.state.currentUser === 'Patrik' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Patrik")}>Patrik</a></li>
+                                    <li className={this.state.currentUser === 'Jenny' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Jenny")}>Jenny</a></li>
+                                    <li className={this.state.currentUser === 'Petra' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Petra")}>Petra</a></li>
+                                    <li className={this.state.currentUser === 'Philip' ? 'active': ''}><a className="clickableName" data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer("Philip")}>Philip</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -195,10 +223,28 @@ class App extends Component {
     }
 
     function isBet(bet, ettkrysstva){
-        if (bet == ettkrysstva){
+        if (bet.toLowerCase() == ettkrysstva){
                 return "badge badge-warning"
         }
         else {return ""}
+    }
+
+    function dataToggleCollapsed(menu){
+        if (menu){
+        return "collapse";
+        }
+        else {
+            return "";
+        }
+    }
+
+    function navbarCollapsed(menu){
+        if (menu){
+        return ".navbar-collapse";
+        }
+        else {
+            return "";
+        }
     }
 
     export default App;

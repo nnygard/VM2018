@@ -13,3 +13,18 @@
 .contentBody {
     padding-top: 70px;
 }
+
+.downloadPromt{
+  width:50%;
+    height: auto;
+  padding-top:100px;
+padding-right:50px;
+padding-bottom:50px;
+padding-left:50px;
+}
+
+#over img {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
