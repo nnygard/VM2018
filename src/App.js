@@ -20,6 +20,7 @@ class App extends Component {
         this.setState({
             currentUser: name,
         });
+        this.updateGamesToday(this.state.date);
     }
 
     addDate(add){
@@ -51,6 +52,7 @@ class App extends Component {
     }
 
     renderPlayer() {
+        // console.log(this.state);
         if (!this.state.currentUser){
             return (
                 <div>
@@ -84,12 +86,13 @@ class App extends Component {
     renderMatchesToday(){
         if (this.state.gamesToday!=""){
             var gamesToday = this.state.gamesToday;
+            var player = this.state.currentUser;
             gamesToday.sort((a,b) => a["Tid"] > b["Tid"]);
             return(
                 <div>
                     {gamesToday.map(
                         function(value){
-                            return createBox(value)
+                            return createBox(value, player)
                         }
                     )}
                 </div>
@@ -112,7 +115,8 @@ class App extends Component {
         render() {
             return (
                 <div>
-                    <nav className="navbar navbar-default">
+
+                    <nav className="navbar navbar-default navbar-fixed-top">
                         <div className="container">
                             <div className="navbar-header">
                                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -126,12 +130,17 @@ class App extends Component {
                             <div className="navbar-collapse collapse">
                                 <ul className="nav navbar-nav">
                                     <li className={this.state.currentUser === 'Niklas' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Niklas")}>Niklas</a></li>
+                                    <li className={this.state.currentUser === 'Alex' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Alex")}>Alex</a></li>
+                                    <li className={this.state.currentUser === 'Douglas' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Douglas")}>Douglas</a></li>
                                     <li className={this.state.currentUser === 'Patrik' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Patrik")}>Patrik</a></li>
+                                    <li className={this.state.currentUser === 'Jenny' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Jenny")}>Jenny</a></li>
+                                    <li className={this.state.currentUser === 'Petra' ? 'active': ''}><a className="clickableName" onClick={()=>this.setPlayer("Petra")}>Petra</a></li>
                                 </ul>
                             </div>
                         </div>
                     </nav>
-                    <div className="container">
+
+                    <div className="container contentBody">
                         {this.renderPlayer()}
                     </div>
                 </div>
@@ -139,7 +148,8 @@ class App extends Component {
         }
     }
 
-    function createBox(props) {
+    function createBox(props, player) {
+        var playerScore = player + "_Resultat"
         return (
             <div className="panel panel-primary" key={props.Hemma}>
                 <div className="panel-heading">
@@ -158,17 +168,37 @@ class App extends Component {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span className="badge badge-secondary badge-pill">2</span></td>
-                                <td><span className="badge badge-secondary badge-pill">2</span></td>
-                                <td>2.23</td>
-                                <td><span className="badge badge-warning">2.54</span></td>
-                                <td>4.23</td>
+                                <td><span className="badge badge-secondary badge-pill">{score(props[playerScore], 0)}</span></td>
+                                <td><span className="badge badge-secondary badge-pill">{score(props[playerScore], 1)}</span></td>
+                                <td><span className={isBet(props[player],"1")}>{odds(props[1], props[1], props["X"], props[2])}</span></td>
+                                <td><span className={isBet(props[player],"x")}>{odds(props["X"], props[1], props["X"], props[2])}</span></td>
+                                <td><span className={isBet(props[player],"2")}>{odds(props[2], props[1], props["X"], props[2])}</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         );
+    }
+
+    function score(resultat, index){
+        return resultat.split("-")[index];
+    }
+
+    //Kanske Fixa PCTTAL?
+    function odds(input, ett, kryss, tva){
+        // var sumOdds = Math.round(Number(ett) + Number(kryss) + Number(tva));
+        // var returnValue = (1 - input/sumOdds);
+        // var increaseFactor = 100/sumOdds;
+        // return input+ " / "+ sumOdds;
+        return input;
+    }
+
+    function isBet(bet, ettkrysstva){
+        if (bet == ettkrysstva){
+                return "badge badge-warning"
+        }
+        else {return ""}
     }
 
     export default App;
