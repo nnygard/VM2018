@@ -28,3 +28,18 @@ padding-left:50px;
 	margin-right: auto;
 	display: block;
 }
+
+.paddy{
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:15px;
+    padding-right:15px;
+}
+
+.setwidth1 {
+    width: 30%;
+}
+
+.setwidth2 {
+    width: 13.33%;
+}

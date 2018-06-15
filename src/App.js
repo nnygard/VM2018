@@ -11,7 +11,7 @@ class App extends Component {
             date:false,
             gamesToday:"",
             menu:false,
-            prompted:false,
+            prompted:true, //set to false if you want to promt user
         };
         if (!this.state.date){
             //Set DATE
@@ -82,9 +82,17 @@ class App extends Component {
                             <div className="over">
                             <img src={installPromt} alt="Installera" align=""/>
                             </div>
-                        ) : <p>
-                        Four-four-two African Cup of Nations referee chip number 10 hat trick midfielder brace three-five-two UEFA European Championship defender upper 90 pitch World Cup. Forward four-four-two African Cup of Nations goalie ball one-two number 10 goal halftime midfielder soccer UEFA European Championship pitch chip hat trick. Hat trick referee pitch midfielder striker ball African Cup of Nations halftime forward World Cup one-two defender red card yellow card. World Cup chip number 10 halftime four-four-two ball three-five-two red card brace striker African Cup of Nations soccer midfielder forward defender.
-                        </p> }
+                        ) : <div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Niklas")}>Niklas</button></div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Alex")}>Alex</button></div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Douglas")}>Douglas</button></div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Patrik")}>Patrik</button></div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Jenny")}>Jenny</button></div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Petra")}>Petra</button></div>
+                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Philip")}>Philip</button></div>
+                        </div>
+
+                         }
                     </div>
                 </div>
             );
@@ -187,11 +195,11 @@ class App extends Component {
                     <table className="table">
                         <thead>
                             <tr>
-                                <th scope="col">{props["Hemma"]}</th>
-                                <th scope="col">{props["Borta"]}</th>
-                                <th scope="col">1</th>
-                                <th scope="col">X</th>
-                                <th scope="col">2</th>
+                                <th scope="col" className="setwidth1">{props["Hemma"]}</th>
+                                <th scope="col" className="setwidth1">{props["Borta"]}</th>
+                                <th scope="col" className="setwidth2">1</th>
+                                <th scope="col" className="setwidth2">X</th>
+                                <th scope="col" className="setwidth2">2</th>
                             </tr>
                         </thead>
                         <tbody>
