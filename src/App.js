@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import data from "./data.json";
 import "./App.css";
 import installPromt from "./installPromt.png";
+import Scoreboard from "./Scoreboard.js";
 
 class App extends Component {
     constructor(props){
@@ -72,7 +73,7 @@ class App extends Component {
     }
 
     renderPlayer() {
-        console.log(this.state);
+        // console.log(this.state);
         if (!this.state.currentUser){
             return (
                 <div>
@@ -90,6 +91,9 @@ class App extends Component {
                         <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Jenny")}>Jenny</button></div>
                         <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Petra")}>Petra</button></div>
                         <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Philip")}>Philip</button></div>
+                        <Scoreboard
+                        betting={data}
+                        />
                         </div>
 
                          }
