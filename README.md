@@ -10,6 +10,4 @@
 
 Run 'npm run build'
 
-##Live:
-
 [Join the hype here!](https://VM-2018.surge.sh)
