@@ -78,19 +78,12 @@ class App extends Component {
             return (
                 <div>
                     <div className="row">
-                        <h1>Välj en spelare!</h1>
+                        <h1>Översikt</h1>
                         { !this.state.prompted && !window.matchMedia("(display-mode:standalone)").matches  ? (
                             <div className="over">
                             <img src={installPromt} alt="Installera" align=""/>
                             </div>
                         ) : <div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Niklas")}>Niklas</button></div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Alex")}>Alex</button></div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Douglas")}>Douglas</button></div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Patrik")}>Patrik</button></div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Jenny")}>Jenny</button></div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Petra")}>Petra</button></div>
-                        <div className="paddy"><button type="button" className="btn btn-primary btn-block"  onClick={()=>this.setPlayer("Philip")}>Philip</button></div>
                         <Scoreboard
                         betting={data}
                         />
