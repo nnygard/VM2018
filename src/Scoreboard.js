@@ -86,7 +86,6 @@ class Scoreboard extends Component {
                         }
                         gamesPlayed[0][Scores[name][0]] = PlayerScoreThisRound;
                     }
-                    console.log(gamesPlayed[0]);
                 }
             }
         }
@@ -121,12 +120,8 @@ class Scoreboard extends Component {
                     </div>
 
                     <div className="paddy">
-                        <div className="panel panel-primary">
-                            <div className="panel-heading">
-                                <h3 className="panel-title">Spelade Matcher</h3>
-                                </div>
-                                <div className="panel-body">
-                                    <table className="table">
+                <h1>Matcher</h1>
+                                    <table className="table tablefit">
                                         <thead>
                                             <tr>
                                                 <th scope="col" className="setwidth3">Lag</th>
@@ -144,7 +139,6 @@ class Scoreboard extends Component {
 
                                                     {gamesPlayed.map(
                                                         function(game){
-                                                            console.log(game);
                                                             return (
                                                                 <tr key={game.num}><td align="left">{game.team1.code} - {game.team2.code}</td>
                                                                 <td align="left">{game.score1} - {game.score2}</td>
@@ -162,8 +156,7 @@ class Scoreboard extends Component {
 
                                             </tbody>
                                         </table>
-                                </div>
-                                </div>
+
                             </div>
 
 
