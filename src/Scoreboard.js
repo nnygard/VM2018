@@ -102,13 +102,13 @@ class Scoreboard extends Component {
                                 <thead>
                                     <tr>
                                         <th scope="col">Deltagare</th>
-                                        <th scope="col">Poäng</th>
+                                        <th  className="text-right" scope="col">Poäng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             {Scores.sort((a,b) => a[1] < b[1]).map(
                                                 function(value){
-                                                    return (<tr key={value}><td align="left">{value[0]}</td><td align="left">{value[1]}</td></tr>
+                                                    return (<tr key={value}><td align="left">{value[0]}</td><td align="right">{value[1]}</td></tr>
                                                 );
                                                 }
                                             )}
