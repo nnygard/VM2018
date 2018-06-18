@@ -124,15 +124,15 @@ class Scoreboard extends Component {
                                     <table className="table tablefit">
                                         <thead>
                                             <tr>
-                                                <th scope="col" className="setwidth3">Lag</th>
-                                                <th scope="col" className="setwidth3">Resultat</th>
-                                                    <th scope="col" className="setwidth4">NN</th>
-                                                    <th scope="col" className="setwidth4">AM</th>
-                                                    <th scope="col" className="setwidth4">DA</th>
-                                                    <th scope="col" className="setwidth4">PN</th>
-                                                    <th scope="col" className="setwidth4">JW</th>
-                                                    <th scope="col" className="setwidth4">PP</th>
-                                                    <th scope="col" className="setwidth4">PL</th>
+                                                <th scope="col" className="setwidth3 info">Lag</th>
+                                                <th scope="col" className="setwidth3 info">Resultat</th>
+                                                    <th scope="col" className="setwidth4 info">NN</th>
+                                                    <th scope="col" className="setwidth4 info">AM</th>
+                                                    <th scope="col" className="setwidth4 info">DA</th>
+                                                    <th scope="col" className="setwidth4 info">PN</th>
+                                                    <th scope="col" className="setwidth4 info">JW</th>
+                                                    <th scope="col" className="setwidth4 info">PP</th>
+                                                    <th scope="col" className="setwidth4 info">PL</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -140,15 +140,16 @@ class Scoreboard extends Component {
                                                     {gamesPlayed.map(
                                                         function(game){
                                                             return (
-                                                                <tr key={game.num}><td align="left">{game.team1.code} - {game.team2.code}</td>
+                                                                <tr key={game.num}>
+                                                                <td align="left">{game.team1.code} - {game.team2.code}</td>
                                                                 <td align="left">{game.score1} - {game.score2}</td>
-                                                                <td align="left">{game.Niklas}</td>
-                                                                <td align="left">{game.Alex}</td>
-                                                                <td align="left">{game.Douglas}</td>
-                                                                <td align="left">{game.Patrik}</td>
-                                                                <td align="left">{game.Jenny}</td>
-                                                                <td align="left">{game.Petra}</td>
-                                                                <td align="left">{game.Philip}</td>
+                                                                <td align="left" className={setColor(game.Niklas)}>{game.Niklas}</td>
+                                                                <td align="left" className={setColor(game.Alex)}>{game.Alex}</td>
+                                                                <td align="left" className={setColor(game.Douglas)}>{game.Douglas}</td>
+                                                                <td align="left" className={setColor(game.Patrik)}>{game.Patrik}</td>
+                                                                <td align="left" className={setColor(game.Jenny)}>{game.Jenny}</td>
+                                                                <td align="left" className={setColor(game.Petra)}>{game.Petra}</td>
+                                                                <td align="left" className={setColor(game.Philip)}>{game.Philip}</td>
                                                             </tr>
                                                         );
                                                         }
@@ -168,5 +169,21 @@ class Scoreboard extends Component {
         function score(resultat, index){
             return resultat.split("-")[index];
         }
+
+        function setColor(points){
+            if (points == 0){
+            return "danger";
+            }
+            if (3<points && points<7){
+                return "warning";
+            }
+            if (points>6){
+                return "success";
+            }
+            else {
+                return "active";
+            }
+        }
+
 
         export default Scoreboard;
