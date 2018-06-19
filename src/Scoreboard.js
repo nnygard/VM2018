@@ -3,11 +3,12 @@ import "./App.css";
 
 
 class Scoreboard extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state= {
             gamesPlayedLoaded:false,
         };
+
     }
 
     componentWillMount(){
@@ -36,7 +37,6 @@ class Scoreboard extends Component {
         ];
 
         var gamesPlayed = [];
-
         var rounds = this.state.gamesPlayedLoaded.rounds;
         for (var day in rounds){
             var matches = rounds[day].matches;

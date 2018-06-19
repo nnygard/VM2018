@@ -85,7 +85,10 @@ class App extends Component {
                             </div>
                         ) : <div>
                         <Scoreboard
+                        setPlayer={this.setPlayer}
+                        currentUser={this.state.currentUser}
                         betting={data}
+
                         />
                         </div>
 
@@ -100,14 +103,14 @@ class App extends Component {
             return (
                 <div>
                     <div className="row">
-                        <span className="glyphicon glyphicon-chevron-up" aria-hidden="true" onClick={()=>this.addDate(-1)}></span>
+                        <span className="glyphicon glyphicon-chevron-up largeGlyph" aria-hidden="true" onClick={()=>this.addDate(-1)}></span>
                     </div>
                     <div className="row">
                         <h2>{this.state.date}</h2>
                     </div>
                     {this.renderMatchesToday()}
                     <div className="row">
-                        <span className="glyphicon glyphicon-chevron-down" aria-hidden="true" onClick={()=>this.addDate(1)}></span>
+                        <span className="glyphicon glyphicon-chevron-down largeGlyph" aria-hidden="true" onClick={()=>this.addDate(1)}></span>
                     </div>
                 </div>
             );
@@ -157,7 +160,10 @@ class App extends Component {
                                     <span className="icon-bar"></span>
                                     <span className="icon-bar"></span>
                                 </button>
-                                <a className="navbar-brand"  onClick={()=>this.setPlayer(false)}>VM2018 {this.state.currentUser ? '- '+this.state.currentUser : 'Översikt'}</a>
+                                <a className="navbar-brand clickableName"  data-toggle={dataToggleCollapsed(this.state.menu)} data-target={navbarCollapsed(this.state.menu)} onClick={()=>this.setPlayer(false)}>
+                                {this.state.currentUser ? <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>:''}
+                                {this.state.currentUser ? this.state.currentUser : 'VM2018'}
+                                </a>
                             </div>
                             <div className="navbar-collapse collapse">
                                 <ul className="nav navbar-nav">
