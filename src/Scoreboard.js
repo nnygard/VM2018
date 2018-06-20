@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./App.css";
-
+//Bör ändra rader 63, 67, 77, 174
 
 class Scoreboard extends Component {
     constructor(props){
@@ -108,9 +108,9 @@ class Scoreboard extends Component {
                                     <tbody>
                                             {Scores.sort((a,b) => a[1] < b[1]).map(
                                                 function(value){
-                                                    return (<tr key={value}><td align="left">{value[0]}</td><td align="right">{value[1]}</td></tr>
+                                                    return (<tr onClick={()=>this.props.setPlayer(value[0])} key={value}><td align="left">{value[0]}</td><td align="right">{value[1]}</td></tr>
                                                 );
-                                                }
+                                            }, this
                                             )}
 
                                     </tbody>

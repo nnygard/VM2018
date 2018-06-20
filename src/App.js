@@ -3,7 +3,7 @@ import data from "./data.json";
 import "./App.css";
 import installPromt from "./installPromt.png";
 import Scoreboard from "./Scoreboard.js";
-
+//FIX! Bör ändra rader 46, 68, 121, 236
 class App extends Component {
     constructor(props){
         super(props);
@@ -85,10 +85,9 @@ class App extends Component {
                             </div>
                         ) : <div>
                         <Scoreboard
-                        setPlayer={this.setPlayer}
-                        currentUser={this.state.currentUser}
+                        setPlayer={this.setPlayer.bind(this)}
+                        parrentState={this.state}
                         betting={data}
-
                         />
                         </div>
 
