@@ -49,10 +49,10 @@ class Scoreboard extends Component {
                     var betGame = this.props.betting[gameindex-1];
                     //Räkna ut resultat
                     var result = "x";
-                    if (resultGame.goals1 > resultGame.goals2){
+                    if (resultGame.score1 > resultGame.score2){
                         result = "1";
                     }
-                    if (resultGame.goals1 < resultGame.goals2){
+                    if (resultGame.score1 < resultGame.score2){
                         result = "2";
                     }
                     for (var name in Scores){
