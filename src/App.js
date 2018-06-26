@@ -188,10 +188,12 @@ class App extends Component {
 
     function createBox(props, player) {
         var playerScore = player + "_Resultat"
+        var playerHome = player + "_Hemma"
+        var playerGone = player + "_Borta"
         return (
             <div className="panel panel-primary" key={props.Hemma}>
                 <div className="panel-heading">
-                    <h3 className="panel-title">{props["Hemma"]} - {props["Borta"]}, {props["Tid"]}</h3>
+                    <h3 className="panel-title">{props["Hemma"]} {props["Hemma"] === props[playerHome] ? (<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>):props[playerHome]?"("+props[playerHome]+")":""} - {props["Borta"]} {props["Borta"] === props[playerGone] ? (<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>):props[playerGone]?"("+props[playerGone]+")":""}, {props["Tid"]}</h3>
                 </div>
                 <div className="panel-body">
                     <table className="table">
@@ -219,8 +221,14 @@ class App extends Component {
         );
     }
 
+    //added check if result exists
     function score(resultat, index){
+        if (resultat){
         return resultat.split("-")[index];
+        }
+        else {
+            return "N/A"
+        }
     }
 
     //Kanske Fixa PCTTAL?
@@ -232,11 +240,14 @@ class App extends Component {
         return input;
     }
 
+    //added check if bet exists
     function isBet(bet, ettkrysstva){
+        if (bet){
         if (bet.toLowerCase() == ettkrysstva){
                 return "badge badge-warning"
         }
         else {return ""}
+        }
     }
 
     function dataToggleCollapsed(menu){
