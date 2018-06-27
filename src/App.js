@@ -193,7 +193,7 @@ class App extends Component {
         return (
             <div className="panel panel-primary" key={props.Hemma}>
                 <div className="panel-heading">
-                    <h3 className="panel-title">{props["Hemma"]} {props["Hemma"] === props[playerHome] ? (<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>):props[playerHome]?"("+props[playerHome]+")":""} - {props["Borta"]} {props["Borta"] === props[playerGone] ? (<span className="glyphicon glyphicon-ok" aria-hidden="true"></span>):props[playerGone]?"("+props[playerGone]+")":""}, {props["Tid"]}</h3>
+                    <h3 className="panel-title">{correctGuess(props["Hemma"], props[playerHome])} - {correctGuess(props["Borta"], props[playerGone])}, {props["Tid"]}</h3>
                 </div>
                 <div className="panel-body">
                     <table className="table">
@@ -265,6 +265,20 @@ class App extends Component {
         }
         else {
             return "";
+        }
+    }
+
+    function correctGuess(actual, guessed){
+        if (guessed){
+            if (actual === guessed){
+                return (<div style={{display:'inline-block',}}><span className='badge'>{actual+" "}<span className='glyphicon glyphicon-ok'></span></span></div>)
+            }
+            else {
+                return (<div style={{display:'inline-block',}}>{actual+ " "}<div className='text-danger' style={{display:'inline-block',}}><b>({guessed})</b></div></div>);
+            }
+        }
+        else {
+            return actual
         }
     }
 
