@@ -86,7 +86,7 @@ class Scoreboard extends Component {
                         }
                         // console.log(betGame);
                         var player_Home = player + "_Hemma";
-                        var player_Gone = player + "_Gone";
+                        var player_Gone = player + "_Borta";
 
                         if (betGame[player_Home] || betGame[player_Gone]){
                             if (betGame[player_Home].replace(/\s/g,'')===betGame["Hemma"].replace(/\s/g,'')){
