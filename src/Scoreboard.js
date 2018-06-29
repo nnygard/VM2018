@@ -35,11 +35,11 @@ class Scoreboard extends Component {
             ["Petra",0],
             ["Philip",0],
         ];
-
         var gamesPlayed = [];
         var rounds = this.state.gamesPlayedLoaded.rounds;
         for (var day in rounds){
             var matches = rounds[day].matches;
+            var currentRound = rounds[day].name;
             for (var game in matches){
                 if (matches[game].score1!==null && matches[game].score2 !==null){
                     //Hitta rätt match i betGame
@@ -82,6 +82,22 @@ class Scoreboard extends Component {
                             else {
                                 Scores[name][1]+=2;
                                 PlayerScoreThisRound+=2;
+                            }
+                        }
+                        // console.log(betGame);
+                        var player_Home = player + "_Hemma";
+                        var player_Gone = player + "_Gone";
+
+                        if (betGame[player_Home] || betGame[player_Gone]){
+                            if (betGame[player_Home].replace(/\s/g,'')===betGame["Hemma"].replace(/\s/g,'')){
+                                //Om hemma rätt
+                                Scores[name][1]+=pointsThisRound(currentRound);
+                                PlayerScoreThisRound+=pointsThisRound(currentRound);
+                            }
+                            if (betGame[player_Gone].replace(/\s/g,'')===betGame["Borta"].replace(/\s/g,'')){
+                                //Om hemma rätt
+                                Scores[name][1]+=pointsThisRound(currentRound);
+                                PlayerScoreThisRound+=pointsThisRound(currentRound);
                             }
                         }
                         gamesPlayed[0][Scores[name][0]] = PlayerScoreThisRound;
@@ -167,7 +183,12 @@ class Scoreboard extends Component {
         }
 
         function score(resultat, index){
+            if (resultat){
             return resultat.split("-")[index];
+            }
+            else {
+                return -1
+            };
         }
 
         function setColor(points){
@@ -185,5 +206,22 @@ class Scoreboard extends Component {
             }
         }
 
+        function pointsThisRound(currentRound){
+            if (currentRound==="Round of 16"){
+                return 2;
+            }
+            if (currentRound==="Quarter-finals"){
+                return 4;
+            }
+            if (currentRound==="Semi-finals"){
+                return 6;
+            }
+            if (currentRound==="Match for third place"){
+                return 8;
+            }
+            if (currentRound==="Final"){
+                return 10;
+            }
+        }
 
         export default Scoreboard;
