@@ -60,10 +60,12 @@ class Scoreboard extends Component {
                         var player = Scores[name][0];
                         var player_Resultat = player +"_Resultat"
                         //Rätt Kryss Två
-                        if (betGame[player].toLowerCase()==result){
+
+                        if (betGame[player] && betGame[player].toLowerCase()==result){
                             Scores[name][1] += 3;
                             PlayerScoreThisRound +=3;
                         }
+
                         if (resultGame.score1 == score(betGame[player_Resultat], 0)){
                             if (resultGame.score1>1){
                                 Scores[name][1] += 3;
