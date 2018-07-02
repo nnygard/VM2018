@@ -44,6 +44,7 @@ class Scoreboard extends Component {
                 if (matches[game].score1!==null && matches[game].score2 !==null){
                     //Hitta rätt match i betGame
                     var resultGame = matches[game];
+                    console.log(resultGame)
                     gamesPlayed.unshift(resultGame);
                     var gameindex = resultGame.num;
                     var betGame = this.props.betting[gameindex-1];
@@ -54,6 +55,13 @@ class Scoreboard extends Component {
                     }
                     if (resultGame.score1 < resultGame.score2){
                         result = "2";
+                    }
+                    var score1 = resultGame.score1;
+                    var score2 = resultGame.score2;
+                    if (resultGame.score1et || resultGame.score2et){
+                        result = "x";
+                        var score1 = resultGame.score1et;
+                        var score2 = resultGame.score2et;
                     }
                     for (var name in Scores){
                         var PlayerScoreThisRound = 0;
@@ -66,8 +74,8 @@ class Scoreboard extends Component {
                             PlayerScoreThisRound +=3;
                         }
 
-                        if (resultGame.score1 == score(betGame[player_Resultat], 0)){
-                            if (resultGame.score1>1){
+                        if (score1 == score(betGame[player_Resultat], 0)){
+                            if (score1>1){
                                 Scores[name][1] += 3;
                                 PlayerScoreThisRound+=3;
                             }
@@ -76,8 +84,8 @@ class Scoreboard extends Component {
                                 PlayerScoreThisRound+=2;
                             }
                         }
-                        if (resultGame.score2 == score(betGame[player_Resultat], 1)){
-                            if (resultGame.score2>1){
+                        if (score2 == score(betGame[player_Resultat], 1)){
+                            if (score2>1){
                                 Scores[name][1] += 3;
                                 PlayerScoreThisRound+=3;
                             }
@@ -160,7 +168,7 @@ class Scoreboard extends Component {
                                                             return (
                                                                 <tr key={game.num}>
                                                                 <td align="center">{game.team1.code} - {game.team2.code}</td>
-                                                                <td align="center">{game.score1} - {game.score2}</td>
+                                                                <td align="center">{game.score1et ? game.score1et+ "("+game.score1+")" : game.score1} - {game.score1et ? game.score2et + "("+game.score2+")" : game.score2}</td>
                                                                 <td align="center" className={setColor(game.Niklas)}>{game.Niklas}</td>
                                                                 <td align="center" className={setColor(game.Alex)}>{game.Alex}</td>
                                                                 <td align="center" className={setColor(game.Douglas)}>{game.Douglas}</td>
