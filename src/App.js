@@ -58,7 +58,7 @@ class App extends Component {
     navigateToGames(){
         //Todo: Navigate to closest Game
         // var FirstGame = new Date("2018-06-14").toJSON().slice(0,10).replace(/-/g,'-');
-        var FirstPlayOffs = new Date("2018-06-30").toJSON().slice(0,10).replace(/-/g,'-');
+        var FirstPlayOffs = new Date("2018-07-06").toJSON().slice(0,10).replace(/-/g,'-');
         var FirstGame = FirstPlayOffs;
         this.setState({
             date: FirstGame,
