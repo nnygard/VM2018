@@ -57,13 +57,20 @@ class App extends Component {
 
     navigateToGames(){
         //Todo: Navigate to closest Game
-        // var FirstGame = new Date("2018-06-14").toJSON().slice(0,10).replace(/-/g,'-');
-        var FirstPlayOffs = new Date("2018-07-06").toJSON().slice(0,10).replace(/-/g,'-');
-        var FirstGame = FirstPlayOffs;
+        var FirstGame = new Date("2018-07-06").toJSON().slice(0,10).replace(/-/g,'-');
         this.setState({
             date: FirstGame,
         });
         this.updateGamesToday(FirstGame);
+    }
+
+    navigateToPlayerGames(date, player){
+        var gameDate = new Date(date).toJSON().slice(0,10).replace(/-/g,'-');
+        this.setState({
+            date: gameDate,
+            currentUser: player,
+        });
+        this.updateGamesToday(gameDate);
     }
 
     promtUser(){
@@ -88,6 +95,7 @@ class App extends Component {
                         ) : <div>
                         <Scoreboard
                         setPlayer={this.setPlayer.bind(this)}
+                        navigateToGames={this.navigateToPlayerGames.bind(this)}
                         parrentState={this.state}
                         betting={data}
                         />

@@ -44,7 +44,6 @@ class Scoreboard extends Component {
                 if (matches[game].score1!==null && matches[game].score2 !==null){
                     //Hitta rätt match i betGame
                     var resultGame = matches[game];
-                    console.log(resultGame)
                     gamesPlayed.unshift(resultGame);
                     var gameindex = resultGame.num;
                     var betGame = this.props.betting[gameindex-1];
@@ -60,8 +59,8 @@ class Scoreboard extends Component {
                     var score2 = resultGame.score2;
                     if (resultGame.score1et || resultGame.score2et){
                         result = "x";
-                        var score1 = resultGame.score1et;
-                        var score2 = resultGame.score2et;
+                        score1 = resultGame.score1et;
+                        score2 = resultGame.score2et;
                     }
                     for (var name in Scores){
                         var PlayerScoreThisRound = 0;
@@ -169,16 +168,16 @@ class Scoreboard extends Component {
                                                                 <tr key={game.num}>
                                                                 <td align="center">{game.team1.code} - {game.team2.code}</td>
                                                                 <td align="center">{game.score1et ? game.score1et+ "("+game.score1+")" : game.score1} - {game.score1et ? game.score2et + "("+game.score2+")" : game.score2}</td>
-                                                                <td align="center" className={setColor(game.Niklas)}>{game.Niklas}</td>
-                                                                <td align="center" className={setColor(game.Alex)}>{game.Alex}</td>
-                                                                <td align="center" className={setColor(game.Douglas)}>{game.Douglas}</td>
-                                                                <td align="center" className={setColor(game.Patrik)}>{game.Patrik}</td>
-                                                                <td align="center" className={setColor(game.Jenny)}>{game.Jenny}</td>
-                                                                <td align="center" className={setColor(game.Petra)}>{game.Petra}</td>
-                                                                <td align="center" className={setColor(game.Philip)}>{game.Philip}</td>
+                                                                <td align="center" className={setColor(game.Niklas)} onClick={()=>this.props.navigateToGames(game.date, "Niklas")}>{game.Niklas}</td>
+                                                                <td align="center" className={setColor(game.Alex)} onClick={()=>this.props.navigateToGames(game.date, "Alex")}>{game.Alex}</td>
+                                                                <td align="center" className={setColor(game.Douglas)} onClick={()=>this.props.navigateToGames(game.date, "Douglas")}>{game.Douglas}</td>
+                                                                <td align="center" className={setColor(game.Patrik)} onClick={()=>this.props.navigateToGames(game.date, "Patrik")}>{game.Patrik}</td>
+                                                                <td align="center" className={setColor(game.Jenny)} onClick={()=>this.props.navigateToGames(game.date, "Jenny")}>{game.Jenny}</td>
+                                                                <td align="center" className={setColor(game.Petra)} onClick={()=>this.props.navigateToGames(game.date, "Petra")}>{game.Petra}</td>
+                                                                <td align="center" className={setColor(game.Philip)} onClick={()=>this.props.navigateToGames(game.date, "Philip")}>{game.Philip}</td>
                                                             </tr>
                                                         );
-                                                        }
+                                                    }, this
                                                     )}
 
                                             </tbody>
@@ -196,9 +195,7 @@ class Scoreboard extends Component {
             if (resultat){
             return resultat.split("-")[index];
             }
-            else {
-                return -1
-            };
+            else return -1
         }
 
         function setColor(points){
