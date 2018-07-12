@@ -61,12 +61,12 @@ class Scoreboard extends Component {
                         result = "x";
                         score1 = 0;
                         score2 = 0;
-                        resultGame.goals1.map(function (value){
+                        resultGame.goals1.forEach(function (value){
                             if (value.minute < 91){
                                 score1+=1;
                             }
                         }, score1)
-                        resultGame.goals2.map(function (value){
+                        resultGame.goals2.forEach(function (value){
                             if (value.minute < 91){
                                 score2+=1;
                             }
