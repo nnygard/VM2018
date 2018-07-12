@@ -44,7 +44,6 @@ class Scoreboard extends Component {
                 if (matches[game].score1!==null && matches[game].score2 !==null){
                     //Hitta rätt match i betGame
                     var resultGame = matches[game];
-                    gamesPlayed.unshift(resultGame);
                     var gameindex = resultGame.num;
                     var betGame = this.props.betting[gameindex-1];
                     //Räkna ut resultat
@@ -58,10 +57,25 @@ class Scoreboard extends Component {
                     var score1 = resultGame.score1;
                     var score2 = resultGame.score2;
                     if (resultGame.score1et || resultGame.score2et){
+                        // console.log(resultGame)
                         result = "x";
-                        score1 = resultGame.score1et;
-                        score2 = resultGame.score2et;
+                        score1 = 0;
+                        score2 = 0;
+                        resultGame.goals1.map(function (value){
+                            if (value.minute < 91){
+                                score1+=1;
+                            }
+                        }, score1)
+                        resultGame.goals2.map(function (value){
+                            if (value.minute < 91){
+                                score2+=1;
+                            }
+                        }, score2)
+                        // console.log(resultGame.team1, score1, resultGame.team2, score2)
                     }
+                    resultGame.score1 = score1;
+                    resultGame.score2 = score2;
+                    gamesPlayed.unshift(resultGame);
                     for (var name in Scores){
                         var PlayerScoreThisRound = 0;
                         var player = Scores[name][0];
@@ -167,7 +181,7 @@ class Scoreboard extends Component {
                                                             return (
                                                                 <tr key={game.num}>
                                                                 <td align="center">{game.team1.code} - {game.team2.code}</td>
-                                                                <td align="center">{game.score1et ? game.score1et+ "("+game.score1+")" : game.score1} - {game.score1et ? game.score2et + "("+game.score2+")" : game.score2}</td>
+                                                                <td align="center">{game.score1} - {game.score2}</td>
                                                                 <td align="center" className={setColor(game.Niklas)} onClick={()=>this.props.navigateToGames(game.date, "Niklas")}>{game.Niklas}</td>
                                                                 <td align="center" className={setColor(game.Alex)} onClick={()=>this.props.navigateToGames(game.date, "Alex")}>{game.Alex}</td>
                                                                 <td align="center" className={setColor(game.Douglas)} onClick={()=>this.props.navigateToGames(game.date, "Douglas")}>{game.Douglas}</td>
